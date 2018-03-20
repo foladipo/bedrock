@@ -220,3 +220,22 @@
        -moz-column-break-inside: avoid;
                    break-inside: avoid;
 }
+
+// Preserve aspect ratio to prevent content jumping when media loads.
+// Apply to a direct parent element of an image or video.
+@mixin aspect-ratio($width, $height, $width-wrapper: 100%) {
+    position: relative;
+    padding-bottom: ($height / $width) * $width-wrapper;
+
+    img,
+    video,
+    iframe,
+    object,
+    embed {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+}

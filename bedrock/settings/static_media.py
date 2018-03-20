@@ -534,6 +534,12 @@ PIPELINE_CSS = {
         ),
         'output_filename': 'css/home-bundle.css',
     },
+    'home-2018': {
+        'source_filenames': (
+            'css/mozorg/home/home-2018.scss',
+        ),
+        'output_filename': 'css/home-2018-bundle.css',
+    },
     'legal': {
         'source_filenames': (
             'css/legal/legal.less',
@@ -1216,6 +1222,13 @@ PIPELINE_JS = {
             'js/libs/jquery.cycle2.min.js',
             'js/libs/jquery.waypoints.min.js',
             'js/mozorg/home/home.js',
+        ),
+        'output_filename': 'js/home-bundle.js',
+    },
+    'home-2018': {
+        'source_filenames': (
+            'js/base/mozilla-lazy-load.js',
+            'js/mozorg/home/home-2018.js',
         ),
         'output_filename': 'js/home-bundle.js',
     },

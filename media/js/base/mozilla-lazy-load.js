@@ -22,6 +22,11 @@ if (typeof Mozilla === 'undefined') {
     LazyLoad.observerCallback = function(changes, observer) {
         changes.forEach(function(change) {
             if (change.intersectionRatio > 0) {
+
+                if (change.target.dataset.srcset) {
+                    change.target.srcset = change.target.dataset.srcset;
+                }
+
                 change.target.src = change.target.dataset.src;
                 change.target.onload = LazyLoad.onImageLoad;
                 observer.unobserve(change.target);
@@ -62,6 +67,12 @@ if (typeof Mozilla === 'undefined') {
      */
     LazyLoad.loadAllFallback = function(_selector) {
         $(_selector).each(function() {
+            var srcset = this.getAttribute('data-srcset');
+
+            if (srcset) {
+                this.srcset = srcset;
+            }
+
             this.src = this.getAttribute('data-src');
             this.onload = LazyLoad.onImageLoad;
         });
@@ -73,6 +84,7 @@ if (typeof Mozilla === 'undefined') {
      */
     LazyLoad.onImageLoad = function(e) {
         e.target.removeAttribute('data-src');
+        e.target.removeAttribute('data-srcset');
     };
 
     /**

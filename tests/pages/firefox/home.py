@@ -38,4 +38,4 @@ class FirefoxHomePage(FirefoxBasePage):
     def play_video(self):
         assert self.is_video_overlay_displayed, 'Video is already displayed'
         self.find_element(*self._video_overlay_locator).click()
-        self.wait.until(lambda s: not self.is_video_overlay_displayed)
+        self.wait.until(lambda s: self.is_video_displayed and not self.is_video_overlay_displayed)

@@ -58,23 +58,6 @@
         }
     }
 
-    function pauseVideo(el) {
-        var video = el.querySelector('video');
-
-        // Only try and auto pause video on desktop.
-        if (!client.isDesktop) {
-            return;
-        }
-
-        try {
-            if (video && !video.paused) {
-                video.pause();
-            }
-        } catch(e) {
-            // Fail silently.
-        }
-    }
-
     function scrollToPrevFeature() {
         var currentElem = document.querySelector('.features-scroller-nav a.current');
 
@@ -137,8 +120,6 @@
                     if (direction === 'down') {
                         setActiveFeature(this.element.id);
                         trackGAScroll(this.element);
-                    } else {
-                        pauseVideo(this.element);
                     }
                 },
                 offset: '50%'
@@ -149,8 +130,6 @@
                 handler: function(direction) {
                     if (direction === 'up') {
                         setActiveFeature(this.element.id);
-                    } else {
-                        pauseVideo(this.element);
                     }
                 },
                 offset: '-50%'

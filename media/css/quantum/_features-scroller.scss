@@ -24,12 +24,22 @@
         background-color: #f9f9fa;
         padding-top: 60px;
 
+        .video-container {
+            box-shadow: 2px 3px 8px 0 rgba(0, 0, 0, .2);
+            height: 0;
+            overflow: hidden;
+            padding-bottom: 67.42%;
+            position: relative;
+            width: 100%;
+        }
+
         figure {
-            padding: 0 20px;
+            margin: 0 20px;
 
             img,
             video {
-                box-shadow: 2px 3px 8px 0 rgba(0, 0, 0, .2);
+                display: block;
+                width: 100%;
             }
         }
 

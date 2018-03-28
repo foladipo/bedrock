@@ -320,7 +320,7 @@ html[dir="rtl"] .whats-new-section {
     .key-feature-media {
 
         &.video {
-            background: #000 url('/media/img/firefox/home/quantum-vs-chrome-poster.png') top left no-repeat;
+            background: #000 url('/media/img/firefox/home/quantum-vs-chrome-poster.png') center left no-repeat;
             @include background-size(cover);
             box-shadow: 2px 3px 8px 0 rgba(0, 0, 0, .2);
             margin: 0 auto;
@@ -331,14 +331,6 @@ html[dir="rtl"] .whats-new-section {
                 overflow: hidden;
                 padding-bottom: 56.25%;
                 position: relative;
-                width: 100%;
-            }
-
-            iframe {
-                height: 100%;
-                left: 0;
-                position: absolute;
-                top:0;
                 width: 100%;
             }
 
@@ -438,6 +430,11 @@ html[dir="rtl"] .whats-new-section {
 
                 &:nth-child(even) {
                     margin-left: -20px;
+                }
+
+                &.video {
+                    height: 364px;
+                    margin: -40px 0;
                 }
 
                 .moz-video-container {

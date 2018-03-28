@@ -5,7 +5,6 @@
 (function (Mozilla, Waypoint) {
     'use strict';
 
-    var client = Mozilla.Client;
     var featureWaypoints = [];
     var nav;
 
@@ -55,23 +54,6 @@
 
             //data-current attribute provides a styling hook for the CSS faux scroll bar.
             nav.setAttribute('data-current', id);
-        }
-    }
-
-    function pauseVideo(el) {
-        var video = el.querySelector('video');
-
-        // Only try and auto pause video on desktop.
-        if (!client.isDesktop) {
-            return;
-        }
-
-        try {
-            if (video && !video.paused) {
-                video.pause();
-            }
-        } catch(e) {
-            // Fail silently.
         }
     }
 
@@ -137,8 +119,6 @@
                     if (direction === 'down') {
                         setActiveFeature(this.element.id);
                         trackGAScroll(this.element);
-                    } else {
-                        pauseVideo(this.element);
                     }
                 },
                 offset: '50%'
@@ -149,8 +129,6 @@
                 handler: function(direction) {
                     if (direction === 'up') {
                         setActiveFeature(this.element.id);
-                    } else {
-                        pauseVideo(this.element);
                     }
                 },
                 offset: '-50%'

@@ -94,16 +94,13 @@
           </div>
           <div class="key-feature-media video">
             <div class="moz-video-container">
-              <button class="moz-video-button" type="button" aria-controls="faster-video">{{ _('Watch the video') }}</button>
-              <div class="video-container">
-                <video id="faster-video" preload="metadata" controls poster="{{ static('img/firefox/home/quantum-vs-chrome-poster.png') }}" data-ga-label="Quantum vs Chrome Video">
-                  <source src="https://assets.mozilla.net/video/firefox-home/quantum-vs-chrome.webm" type="video/webm">
-                  <source src="https://assets.mozilla.net/video/firefox-home/quantum-vs-chrome.ogv" type="video/ogg; codecs='theora, vorbis'">
-                  <source src="https://assets.mozilla.net/video/firefox-home/quantum-vs-chrome.mp4" type="video/mp4">
-                  <a href="https://www.youtube.com/watch?v=YIywpvHewc0">
-                    <img src="{{ static('img/firefox/home/quantum-vs-chrome-poster.png') }}" alt="">
-                  </a>
-                </video>
+              <button class="moz-video-button" type="button" data-src="https://assets.mozilla.net/video/firefox-home/quantum-vs-chrome" data-ga-label="Quantum vs Chrome Video" data-container-id="faster-video-container" data-poster="{{ static('img/firefox/home/quantum-vs-chrome-poster.png') }}">
+                {{ _('Watch the video') }}
+              </button>
+              <div id="faster-video-container" class="video-container">
+                <a href="https://www.youtube.com/watch?v=YIywpvHewc0">
+                  <img src="{{ static('img/firefox/home/quantum-vs-chrome-poster.png') }}" alt="">
+                </a>
               </div>{#-- /.video-container --#}
             </div>{#-- /.moz-video-container --#}
           </div>{#-- /.key-feature-media --#}
@@ -235,14 +232,14 @@
         </header>
         <div class="features-scroller-content">
           <div id="video-screenshots" class="feature-content screenshots" data-ga-label="Features: Screenshots">
-            <figure>
-              <video preload="none" muted controls playsinline poster="{{ static('img/firefox/home/video-screenshots-poster.png') }}" data-ga-label="Features: Screenshots">
-                <source src="https://assets.mozilla.net/video/firefox-home/screenshots.webm" type="video/webm">
-                <source src="https://assets.mozilla.net/video/firefox-home/screenshots.ogv" type="video/ogg; codecs='theora, vorbis'">
-                <source src="https://assets.mozilla.net/video/firefox-home/screenshots.mp4" type="video/mp4">
+            <figure class="moz-video-container">
+              <button class="moz-video-button" type="button" data-src="https://assets.mozilla.net/video/firefox-home/screenshots" data-ga-label="Features: Screenshots" data-container-id="screenshots-video-container" data-poster="{{ static('img/firefox/home/video-screenshots-poster.png') }}">
+                {{ _('Watch the video') }}
+              </button>
+              <div id="screenshots-video-container" class="video-container">
                 <img src="{{ static('img/firefox/home/video-screenshots-poster.png') }}" alt="">
-              </video>
-            </figure>
+              </div>{#-- /.video-container --#}
+            </figure>{#-- /.moz-video-container --#}
             <figcaption>
               <h2>{{ _('Screenshots') }}</h2>
               <p>
@@ -255,14 +252,14 @@
           </div>
 
           <div id="video-pocket" class="feature-content pocket" data-ga-label="Features: Pocket">
-            <figure>
-              <video preload="none" muted controls playsinline poster="{{ static('img/firefox/home/video-pocket-poster.png') }}" data-ga-label="Features: Pocket">
-                <source src="https://assets.mozilla.net/video/firefox-home/pocket.webm" type="video/webm">
-                <source src="https://assets.mozilla.net/video/firefox-home/pocket.ogv" type="video/ogg; codecs='theora, vorbis'">
-                <source src="https://assets.mozilla.net/video/firefox-home/pocket.mp4" type="video/mp4">
+            <figure class="moz-video-container">
+              <button class="moz-video-button" type="button" data-muted="true" data-inline="true" data-ga-label="Features: Pocket" data-container-id="pocket-video-container" data-src="https://assets.mozilla.net/video/firefox-home/pocket" data-poster="{{ static('img/firefox/home/video-pocket-poster.png') }}">
+                {{ _('Watch the video') }}
+              </button>
+              <div id="pocket-video-container" class="video-container">
                 <img src="{{ static('img/firefox/home/video-pocket-poster.png') }}" alt="">
-              </video>
-            </figure>
+              </div>{#-- /.video-container --#}
+            </figure>{#-- /.moz-video-container --#}
             <figcaption>
               <h2>{{ _('Pocket') }}</h2>
               <p>
@@ -275,14 +272,14 @@
           </div>
 
           <div id="video-gaming" class="feature-content gaming-vr" data-ga-label="Features: Gaming & VR">
-            <figure>
-              <video preload="none" muted controls playsinline poster="{{ static('img/firefox/home/video-gaming-poster.png') }}" data-ga-label="Features: Gaming & VR">
-                <source src="https://assets.mozilla.net/video/firefox-home/gaming.webm" type="video/webm">
-                <source src="https://assets.mozilla.net/video/firefox-home/gaming.ogv" type="video/ogg; codecs='theora, vorbis'">
-                <source src="https://assets.mozilla.net/video/firefox-home/gaming.mp4" type="video/mp4">
+            <figure class="moz-video-container">
+              <button class="moz-video-button" type="button" data-muted="true" data-inline="true" data-ga-label="Features: Gaming & VR" data-container-id="gaming-video-container" data-src="https://assets.mozilla.net/video/firefox-home/gaming" data-poster="{{ static('img/firefox/home/video-gaming-poster.png') }}">
+                {{ _('Watch the video') }}
+              </button>
+              <div id="gaming-video-container" class="video-container">
                 <img src="{{ static('img/firefox/home/video-gaming-poster.png') }}" alt="">
-              </video>
-            </figure>
+              </div>{#-- /.video-container --#}
+            </figure>{#-- /.moz-video-container --#}
             <figcaption>
               {# L10n: VR can be spelled out as "Virtual Reality" if clearer. #}
               <h2>{{ _('Gaming & VR') }}</h2>
@@ -296,14 +293,14 @@
           </div>
 
           <div id="video-library" class="feature-content library" data-ga-label="Features: Library">
-            <figure>
-              <video preload="none" muted controls playsinline poster="{{ static('img/firefox/home/video-bookmarking-poster.png') }}" data-ga-label="Features: Library">
-                <source src="https://assets.mozilla.net/video/firefox-home/bookmarking.webm" type="video/webm">
-                <source src="https://assets.mozilla.net/video/firefox-home/bookmarking.ogv" type="video/ogg; codecs='theora, vorbis'">
-                <source src="https://assets.mozilla.net/video/firefox-home/bookmarking.mp4" type="video/mp4">
+            <figure class="moz-video-container">
+              <button class="moz-video-button" type="button" data-muted="true" data-inline="true" data-ga-label="Features: Library" data-container-id="library-video-container" data-src="https://assets.mozilla.net/video/firefox-home/bookmarking" data-poster="{{ static('img/firefox/home/video-bookmarking-poster.png') }}">
+                {{ _('Watch the video') }}
+              </button>
+              <div id="library-video-container" class="video-container">
                 <img src="{{ static('img/firefox/home/video-bookmarking-poster.png') }}" alt="">
-              </video>
-            </figure>
+              </div>{#-- /.video-container --#}
+            </figure>{#-- /.moz-video-container --#}
             <figcaption>
               <h2>{{ _('Library') }}</h2>
               <p>

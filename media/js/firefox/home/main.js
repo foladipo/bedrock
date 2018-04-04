@@ -21,42 +21,83 @@
         });
     }
 
-    function initVideoInteractionTracking() {
-        var videos = document.querySelectorAll('video');
-
-        for (var i = 0; i < videos.length; i++) {
-            videos[i].addEventListener('play', function() {
+    function initVideoInteractionTracking(video) {
+        if (video instanceof HTMLVideoElement) {
+            video.addEventListener('play', function() {
                 trackVideoInteraction(this.getAttribute('data-ga-label'), 'play');
             }, false);
 
-            videos[i].addEventListener('pause', function() {
+            video.addEventListener('pause', function() {
                 var action = this.currentTime === this.duration ? 'complete' : 'pause';
                 trackVideoInteraction(this.getAttribute('data-ga-label'), action);
             }, false);
         }
     }
 
-    // Init video poster helper and bind video interaction events for JS tracking.
-    function initFasterVideo() {
-        var videoPoster = new Mozilla.VideoPosterHelper('.key-features-section .key-feature-media.video');
-        videoPoster.init();
+    function initVideoThumbnails() {
+        var videoButtons = document.querySelectorAll('.moz-video-button');
 
-        // Auto pause the video when scrolled out of view.
-        new Waypoint({
-            element: document.getElementById('faster-video'),
-            handler: function(direction) {
-                if (direction === 'down') {
-                    try {
-                        if (!this.element.paused) {
-                            this.element.pause();
-                        }
-                    } catch(e) {
-                        // Fail silently.
-                    }
-                }
-            },
-            offset: '-50%'
-        });
+        for (var i = 0; i < videoButtons.length; i++) {
+            videoButtons[i].addEventListener('click', lazyLoadVideo, false);
+            videoButtons[i].style.display = 'block';
+        }
+    }
+
+    function lazyLoadVideo(e) {
+        var targetSrc = e.target.getAttribute('data-src');
+        var targetPoster = e.target.getAttribute('data-poster');
+        var targetMuted = e.target.getAttribute('data-muted');
+        var targetInline = e.target.getAttribute('data-inline');
+        var targetGALabel = e.target.getAttribute('data-ga-label');
+        var targetContainerId = e.target.getAttribute('data-container-id');
+        var videoContainer = document.getElementById(targetContainerId);
+        var videoFragment = document.createDocumentFragment();
+        var videoElement = document.createElement('video');
+        var sourceWebm = document.createElement('source');
+        var sourceOgv = document.createElement('source');
+        var sourceMp4 = document.createElement('source');
+
+        sourceWebm.setAttribute('src', targetSrc + '.webm');
+        sourceWebm.setAttribute('type', 'video/webm');
+
+        sourceOgv.setAttribute('src', targetSrc + '.ogv');
+        sourceOgv.setAttribute('type', 'video/ogg; codecs=\'theora, vorbis\'');
+
+        sourceMp4.setAttribute('src', targetSrc + '.mp4');
+        sourceMp4.setAttribute('type', 'video/mp4');
+
+        videoFragment.appendChild(videoElement);
+        videoElement.appendChild(sourceWebm);
+        videoElement.appendChild(sourceOgv);
+        videoElement.appendChild(sourceMp4);
+
+        videoElement.controls = 'controls';
+        videoElement.poster = targetPoster;
+
+        videoElement.setAttribute('data-ga-label', targetGALabel);
+
+        if (targetMuted) {
+            videoElement.muted = true;
+        }
+
+        if (targetInline) {
+            videoElement.playsinline = true;
+        }
+
+        videoContainer.innerHTML = '';
+        videoContainer.appendChild(videoFragment);
+
+        initVideoInteractionTracking(videoElement);
+
+        videoElement.load();
+
+        e.target.style.display = 'none';
+
+        try {
+            videoElement.play();
+        } catch (err) {
+            // do nothing
+        }
     }
 
     // Bind one time scroll tracking events for main page sections.
@@ -82,7 +123,7 @@
     }
 
     if (supportsBaselineJS()) {
-        initFasterVideo();
+        initVideoThumbnails();
         initScrollTracking();
         initVideoInteractionTracking();
     }

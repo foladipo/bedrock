@@ -19,7 +19,7 @@
 
     .moz-video-button {
         @include background-size(cover);
-        background-color: transparent;
+        background-color: rgba(0, 0, 0, .1);
         background-position: top left;
         background-repeat: no-repeat;
         border: none;
